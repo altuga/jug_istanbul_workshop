@@ -6,6 +6,7 @@
 package com.airhacks.control;
 
 import com.airhacks.entity.Ping;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
@@ -30,6 +31,10 @@ public class PingBean {
     public Ping save(Ping ping) {
         return entityManager.merge(ping);
         
+    }
+    
+    public List<Ping> listall() {
+       return entityManager.createNamedQuery("all", Ping.class).getResultList();
     }
     
 }
