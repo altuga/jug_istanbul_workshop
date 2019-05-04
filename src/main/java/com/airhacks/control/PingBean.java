@@ -5,8 +5,11 @@
  */
 package com.airhacks.control;
 
+import com.airhacks.entity.Ping;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -16,8 +19,17 @@ import javax.interceptor.Interceptors;
 @Interceptors(CallTracer.class)
 public class PingBean {
     
+    @PersistenceContext
+    EntityManager entityManager;
+    
     public String getHello() {
         return "Hello from PingBean " ;
+    }
+    
+    
+    public Ping save(Ping ping) {
+        return entityManager.merge(ping);
+        
     }
     
 }
